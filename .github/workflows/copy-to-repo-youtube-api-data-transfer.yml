@@ -15,26 +15,14 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Push github action
+    - name: Push github action and configs
       uses: dennisvtang/copy_file_to_another_repo_action_push_force@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
       with:
         user_name: ${{ env.DESTINATION_USERNAME }}
         user_email: ${{ env.COMMIT_EMAIL }}
-        source_file: '.github/workflows/ci.yml'
-        destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
-        destination_branch_create: 'add-or-update-python-linters'
-        destination_folder: '.github/workflows/'
-
-    - name: Push configs
-      uses: dennisvtang/copy_file_to_another_repo_action_push_force@main
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
-      with:
-        user_name: ${{ env.DESTINATION_USERNAME }}
-        user_email: ${{ env.COMMIT_EMAIL }}
-        source_file: 'configs/'
+        source_file: '.github configs/'
         destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
         destination_branch_create: 'add-or-update-python-linters'
         use_rsync: true
