@@ -22,7 +22,7 @@ jobs:
       with:
         user_name: ${{ env.DESTINATION_USERNAME }}
         user_email: ${{ env.COMMIT_EMAIL }}
-        source_file: '.github'
+        source_file: '.github/workflows/ci.yml configs/'
         destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
         destination_branch_create: 'add-or-update-python-linters'
         use_rsync: true
