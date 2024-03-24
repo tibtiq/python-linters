@@ -1,0 +1,39 @@
+env:
+  DESTINATION_USERNAME: 'dennisvtang'
+  DESTINATION_REPOSITORY: 'youtube-api-data-transfer'
+  COMMIT_EMAIL: 'dennisvtang@gmail.com'
+
+on:
+  # allows manual trigger
+  workflow_dispatch:
+  push:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Push github action
+      uses: nkoppel/push-files-to-another-repository@v1.1.2
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
+      with:
+        source-files: '.github/workflows/ci.yml'
+        destination-username: ${{ env.DESTINATION_USERNAME }}
+        destination-repository: ${{ env.DESTINATION_REPOSITORY }}
+        commit-email: ${{ env.COMMIT_EMAIL }}
+        destination-branch: 'add-or-update-python-linters'
+        destination-directory: '.github/workflows/'
+
+    - name: Push configs
+      uses: nkoppel/push-files-to-another-repository@v1.1.2
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
+      with:
+        source-files: 'configs/*'
+        destination-username: ${{ env.DESTINATION_USERNAME }}
+        destination-repository: ${{ env.DESTINATION_REPOSITORY }}
+        commit-email: ${{ env.COMMIT_EMAIL }}
+        destination-branch: 'add-or-update-python-linters'
