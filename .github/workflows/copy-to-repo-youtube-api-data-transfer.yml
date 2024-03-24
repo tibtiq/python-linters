@@ -23,7 +23,7 @@ jobs:
         user_name: ${{ env.DESTINATION_USERNAME }}
         user_email: ${{ env.COMMIT_EMAIL }}
         source_file: '.github/workflows/ci.yml'
-        destination_repo: ${{ env.DESTINATION_REPOSITORY }}
+        destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
         destination_branch: 'add-or-update-python-linters'
         destination_folder: '.github/workflows/'
 
@@ -35,5 +35,5 @@ jobs:
         user_name: ${{ env.DESTINATION_USERNAME }}
         user_email: ${{ env.COMMIT_EMAIL }}
         source_file: 'configs/'
-        destination_repo: ${{ env.DESTINATION_REPOSITORY }}
-        destination_branch: 'add-or-update-python-linters'
+        destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
+        destination_branch_create: 'add-or-update-python-linters'
