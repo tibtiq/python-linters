@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Push github action and configs
-      uses: dennisvtang/copy_file_to_another_repo_action_push_force@6b35ad4b6172ddabe45d417f5aad431bc4b09a10
+      uses: dennisvtang/copy_file_to_another_repo_action_push_force@HEAD
 
       env:
         API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
