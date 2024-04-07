@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Push github action and configs
-      uses: dennisvtang/copy_file_to_another_repo_action@5710a631051522acff31f11a755e032283bba254
+      uses: dennisvtang/copy_file_to_another_repo_action@latest
 
       env:
         API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
@@ -28,4 +28,5 @@ jobs:
           configs/
         destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
         destination_branch_create: 'add-or-update-python-linters'
+        use_rsync: true
         use_force: true
