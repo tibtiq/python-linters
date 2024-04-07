@@ -12,8 +12,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     - name: Push github action and configs
       uses: dennisvtang/copy_file_to_another_repo_action@latest
