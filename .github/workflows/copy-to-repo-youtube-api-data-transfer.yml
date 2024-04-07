@@ -17,7 +17,6 @@ jobs:
 
     - name: Push github action and configs
       uses: dennisvtang/copy_file_to_another_repo_action@latest
-
       env:
         API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
       with:
