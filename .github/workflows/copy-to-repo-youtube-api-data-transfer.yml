@@ -29,3 +29,4 @@ jobs:
         destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
         destination_branch_create: 'add-or-update-python-linters'
         use_rsync: true
+        use_force: true
