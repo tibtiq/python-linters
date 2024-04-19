@@ -25,7 +25,7 @@ jobs:
         user_name: ${{ env.DESTINATION_USERNAME }}
         user_email: ${{ env.COMMIT_EMAIL }}
         destination_repo: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
-        destination_branch_create: 'add-or-update-python-linters'
+        destination_branch_create: add-or-update-python-linters
         use_rsync: true
         push_with_force: true
         source_files: ${{ env.SOURCE_FILES }}
