@@ -1,8 +1,0 @@
-{
-  "name": "Copy to repo",
-  "description": "Copy github action and configs for python linters",
-  "iconName": "example-icon",
-  "categories": [
-      "code-quality"
-  ]
-}
