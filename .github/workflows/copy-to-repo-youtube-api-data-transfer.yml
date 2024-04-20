@@ -55,7 +55,7 @@ jobs:
           --assignee "@me"
           echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       env:
-        GH_TOKEN: ${{ github.token }}
+        GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
     - name: Send email notification
       uses: dawidd6/action-send-mail@v3
