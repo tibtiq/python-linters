@@ -32,9 +32,9 @@ jobs:
         source_files: ${{ env.SOURCE_FILES }}
 
     - name: Get last commit SHA from python-linters
-      id: python-linters-commit-SHA
+      id: python-linters-commit-sha
       run: |
-        echo ::set-output name=commit_SHA::$(git rev-parse HEAD)
+        echo ::set-output name=commit_sha::$(git rev-parse HEAD)
 
     - uses: actions/checkout@v4
       with:
@@ -49,7 +49,7 @@ jobs:
         --base 'main' \
         --head ${{ env.DESTINATION_BRANCH }} \
         --title 'Add or update python linters' \
-        --body 'Update from ${{ github.repository }}@${{steps.python-linters-commit-SHA.outputs.commit_SHA}}' \
+        --body 'Update from ${{ github.repository }}@${{steps.python-linters-commit-sha.outputs.commit_sha}}' \
         --label 'github action' \
         --label 'bot' \
         --assignee '@me'
