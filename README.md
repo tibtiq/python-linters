@@ -6,5 +6,5 @@ Additionally it contains the github action to run [python-lint-annotate](https:/
 
 # To copy github action and configs to another repo
 - Create a copy of `.github/workflows/workflow-templates/copy-to-repo-TEMPLATE.yml` and rename the "TEMPLATE" portion to the destination repo
-- In the copied file edit the `DESTINATION_REPOSITORY` env variable to be the destination repo.
+- In the copied file edit the 'CHANGEME's in the env section at the top.
 - Commit and push changes.
