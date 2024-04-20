@@ -40,7 +40,7 @@ jobs:
       with:
         token: ${{ secrets.REPO_TOKEN }}
         repository: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
-        ref: add-or-update-python-linters
+        ref: ${{ env.DESTINATION_BRANCH }}
 
     - name: Create pull request
       id: pull-request
