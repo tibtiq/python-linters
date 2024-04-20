@@ -55,6 +55,7 @@ jobs:
         --assignee '@me'
 
         echo ::set-output name=success::$([ "`gh pr list --json title --jq length`" -eq "0" ] && echo "false" || echo "true")
+        echo ::set-output name=pull-request-url::$([ "`gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url`" ])
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
