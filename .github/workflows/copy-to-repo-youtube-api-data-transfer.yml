@@ -47,15 +47,19 @@ jobs:
     - name: Create pull request
       id: pull-request
       run: |
-        --title 'Add or update python linters' && \
-        gh pr create \
-        --base "main" \
-        --title "Add or update python linters" \
+        gh pr edit ${{ env.DESTINATION_BRANCH }} \
+        --base 'main' \
         --head ${{ env.DESTINATION_BRANCH }} \
+        --title 'Add or update python linters' && \
+        gh pr reopen ${{ env.DESTINATION_BRANCH }} || \
+        gh pr create \
+        --base 'main' \
+        --head ${{ env.DESTINATION_BRANCH }} \
+        --title 'Add or update python linters'
         --body "Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${{steps.commit-SHA.outputs.commit_SHA}}" \
-          --label "github action" \
-          --label "bot" \
-          --assignee "@me"
+        --label "github action" \
+        --label "bot" \
+        --assignee "@me"
 
         echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       env:
