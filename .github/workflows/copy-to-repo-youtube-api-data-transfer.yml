@@ -59,7 +59,7 @@ jobs:
       id: pull-request-info
       run: |
         pull_request_status=$(gh pr view ${{env.DESTINATION_BRANCH }})
-        if [[$pull_request_status == *no pull requests*]]; then
+        if (($pull_request_status == *no pull requests*)); then
           echo "success=true" >> $GITHUB_OUTPUT
         else
           echo "success=false" >> $GITHUB_OUTPUT
