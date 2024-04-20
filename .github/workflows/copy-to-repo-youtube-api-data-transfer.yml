@@ -40,8 +40,7 @@ jobs:
     - name: Get last commit SHA
       id: commit-SHA
       run: |
-        git rev-parse HEAD
-        echo ::set-output name=commit_SHA::$(rev-parse HEAD)
+        echo ::set-output name=commit_SHA::$(git rev-parse HEAD)
 
     - name: Create pull request
       id: pull-request
