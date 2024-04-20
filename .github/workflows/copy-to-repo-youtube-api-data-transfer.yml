@@ -65,7 +65,8 @@ jobs:
     - name: Get pull request info
       id: pull-request-info
       run: |
-        echo "pull-request-url=$(`gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url`)" >> "$GITHUB_OUTPUT"
+        pull_request_url=$(gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url)
+        echo "pull-request-url=pull_request_url" >> "$GITHUB_OUTPUT"
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
