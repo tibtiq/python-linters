@@ -55,10 +55,15 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
+    - name: Get pull request success
+      run: |
+        echo "success=$(`gh pr list --json title --jq length` -eq "0")" >> "$GITHUB_OUTPUT"
+      env:
+        GH_TOKEN: ${{ secrets.REPO_TOKEN }}
+
     - name: Get pull request info
       id: pull-request-info
       run: |
-        echo "success=$(`gh pr list --json title --jq length` -eq "0")" >> "$GITHUB_OUTPUT"
         echo "pull-request-url=$(`gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url`)" >> "$GITHUB_OUTPUT"
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
