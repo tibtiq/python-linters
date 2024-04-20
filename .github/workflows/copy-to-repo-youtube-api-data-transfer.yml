@@ -18,7 +18,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Push github action and configs
-      id: push-linter-and-configs
       uses: dennisvtang/copy_file_to_another_repo_action@main
       env:
         API_TOKEN_GITHUB: ${{ secrets.REPO_TOKEN }}
