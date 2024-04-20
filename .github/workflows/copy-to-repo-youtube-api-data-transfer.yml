@@ -52,7 +52,12 @@ jobs:
         --label 'github action' \
         --label 'bot' \
         --assignee '@me'
+      env:
+        GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
+    - name: Get pull request info
+      id: pull-request-info
+      run: |
         echo "success=$("`gh pr list --json title --jq length`" -eq "0")" >> "$GITHUB_OUTPUT"
         echo "pull-request-url=$(`gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url`)" >> "$GITHUB_OUTPUT"
       env:
@@ -60,7 +65,7 @@ jobs:
 
     - name: Send email notification
       uses: dawidd6/action-send-mail@v3
-      if: steps.pull-request.outputs.success == 'true'
+      if: steps.pull-request-info.outputs.success == 'true'
       with:
         # Required mail server address if not connection_url:
         server_address: smtp.gmail.com
@@ -80,5 +85,5 @@ jobs:
         from: '${{ env.DESTINATION_REPOSITORY }}@github.com'
         # Optional plain body:
         html_body: |
-          [${{ env.DESTINATION_REPOSITORY }} pull request](${{ steps.pull-request.outputs.pull-request-url }})
+          [${{ env.DESTINATION_REPOSITORY }} pull request](${{ steps.pull-request-info.outputs.pull-request-url }})
         convert_markdown: true
