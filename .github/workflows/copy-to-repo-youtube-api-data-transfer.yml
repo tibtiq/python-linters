@@ -31,16 +31,16 @@ jobs:
         push_with_force: true
         source_files: ${{ env.SOURCE_FILES }}
 
+    - name: Get last commit SHA from python-linters
+      id: python-linters-commit-SHA
+      run: |
+        echo ::set-output name=commit_SHA::$(git rev-parse HEAD)
+
     - uses: actions/checkout@v4
       with:
         token: ${{ secrets.REPO_TOKEN }}
         repository: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
         ref: add-or-update-python-linters
-
-    - name: Get last commit SHA
-      id: commit-SHA
-      run: |
-        echo ::set-output name=commit_SHA::$(git rev-parse HEAD)
 
     - name: Create pull request
       id: pull-request
@@ -49,7 +49,7 @@ jobs:
         --base 'main' \
         --head ${{ env.DESTINATION_BRANCH }} \
         --title 'Add or update python linters' \
-        --body "Update from ${GITHUB_REPOSITORY}@${{steps.commit-SHA.outputs.commit_SHA}}" \
+        --body "Update from ${GITHUB_REPOSITORY}@${{steps.python-linters-commit-SHA.outputs.commit_SHA}}" \
         --label "github action" \
         --label "bot" \
         --assignee "@me"
