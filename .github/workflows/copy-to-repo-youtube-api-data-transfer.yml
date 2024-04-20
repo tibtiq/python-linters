@@ -58,8 +58,7 @@ jobs:
     - name: Get pull request info
       id: pull-request-info
       run: |
-        num_pull_requests=$(gh pr list --json title --jq length)
-        if ((num_pull_requests > 0)); then
+        if ((gh pr view ${{env.DESTINATION_BRANCH }})); then
           echo "success=true" >> $GITHUB_OUTPUT
         else
           echo "success=false" >> $GITHUB_OUTPUT
