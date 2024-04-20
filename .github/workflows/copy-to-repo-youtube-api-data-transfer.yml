@@ -54,7 +54,7 @@ jobs:
         --label 'bot' \
         --assignee '@me'
 
-        echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+        echo ::set-output name=success::$([ "`gh pr list --json title --jq length`" -eq "0" ] && echo "false" || echo "true")
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
