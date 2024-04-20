@@ -58,13 +58,6 @@ jobs:
     - name: Get pull request info
       id: pull-request-info
       run: |
-        pull_request_status=$(gh pr view ${{env.DESTINATION_BRANCH }})
-        if ((pull_request_status == "\"no pull requests found for branch ${{ env.DESTINATION_BRANCH }}\"")); then
-          echo "success=true" >> $GITHUB_OUTPUT
-        else
-          echo "success=false" >> $GITHUB_OUTPUT
-        fi
-
         pull_request_url=$(gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url)
         echo "pull-request-url=$pull_request_url" >> "$GITHUB_OUTPUT"
       env:
@@ -72,7 +65,7 @@ jobs:
 
     - name: Send email notification
       uses: dawidd6/action-send-mail@v3
-      if: steps.pull-request-info.outputs.success == 'true'
+      if: steps.pull-request-info.outputs.pull-request-url != 'no pull requests found for branch "${{ env.DESTINATION_BRANCH}}"'
       with:
         # Required mail server address if not connection_url:
         server_address: smtp.gmail.com
