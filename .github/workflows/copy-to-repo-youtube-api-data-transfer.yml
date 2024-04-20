@@ -58,7 +58,7 @@ jobs:
     - name: Get pull request success
       run: |
         num_pull_request=$(gh pr list --json title --jq length)
-        echo "success=$(num_pull_requests -eq 0)" >> "$GITHUB_OUTPUT"
+        echo "success=$($num_pull_requests -eq 0)" >> "$GITHUB_OUTPUT"
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
@@ -66,7 +66,7 @@ jobs:
       id: pull-request-info
       run: |
         pull_request_url=$(gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url)
-        echo "pull-request-url=pull_request_url" >> "$GITHUB_OUTPUT"
+        echo "pull-request-url=$pull_request_url" >> "$GITHUB_OUTPUT"
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
