@@ -60,7 +60,7 @@ jobs:
 
     - name: Send email notification
       uses: dawidd6/action-send-mail@v3
-      if: steps.pull-request.outputs.pull-request-operation == 'created' || steps.pull-request.outputs.pull-request-operation == 'updated'
+      if: steps.pull-request.outputs.success == 'true'
       with:
         # Required mail server address if not connection_url:
         server_address: smtp.gmail.com
