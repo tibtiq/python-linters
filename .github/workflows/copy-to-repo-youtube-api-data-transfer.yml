@@ -51,9 +51,11 @@ jobs:
         --head "add-or-update-python-linters" \
         --title "Add or update python linters" \
         --body "Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${{steps.commit-SHA.outputs.commit_SHA}}" \
-        --label "automated pr" \
-        --assignee "@me"
-        echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+          --label "automated pr" \
+          --assignee "@me"
+          echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+      env:
+        GH_TOKEN: ${{ github.token }}
 
     - name: Send email notification
       uses: dawidd6/action-send-mail@v3
