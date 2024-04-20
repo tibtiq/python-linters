@@ -49,7 +49,7 @@ jobs:
         --base 'main' \
         --head ${{ env.DESTINATION_BRANCH }} \
         --title 'Add or update python linters' \
-        --body 'Update from ${GITHUB_REPOSITORY}@${{steps.python-linters-commit-SHA.outputs.commit_SHA}}' \
+        --body 'Update from ${{ github.repository }}@${{steps.python-linters-commit-SHA.outputs.commit_SHA}}' \
         --label 'github action' \
         --label 'bot' \
         --assignee '@me'
