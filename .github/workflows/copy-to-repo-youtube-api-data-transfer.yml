@@ -49,10 +49,10 @@ jobs:
         --base 'main' \
         --head ${{ env.DESTINATION_BRANCH }} \
         --title 'Add or update python linters' \
-        --body "Update from ${GITHUB_REPOSITORY}@${{steps.python-linters-commit-SHA.outputs.commit_SHA}}" \
-        --label "github action" \
-        --label "bot" \
-        --assignee "@me"
+        --body 'Update from ${GITHUB_REPOSITORY}@${{steps.python-linters-commit-SHA.outputs.commit_SHA}}' \
+        --label 'github action' \
+        --label 'bot' \
+        --assignee '@me'
 
         echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       env:
