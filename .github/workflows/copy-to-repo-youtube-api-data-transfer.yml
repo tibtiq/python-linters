@@ -77,8 +77,6 @@ jobs:
         subject: "[${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}] Add or update python linters"
         # Required recipients' addresses:
         to: ${{secrets.GOOGLE_EMAIL_USERNAME}}
-        # Required sender full name (address can be skipped):
-        from: homelab@github.com
         # Optional plain body:
         html_body: |
           [${{ env.DESTINATION_REPOSITORY }} pull request](${{ steps.pull-request.outputs.pull-request-url }})
