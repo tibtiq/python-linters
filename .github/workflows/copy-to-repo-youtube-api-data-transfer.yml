@@ -52,6 +52,7 @@ jobs:
         --title "Add or update python linters" \
         --body "Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${{steps.commit-SHA.outputs.commit_SHA}}" \
           --label "github action" \
+          --label "bot" \
           --assignee "@me"
 
         echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
