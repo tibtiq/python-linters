@@ -13,8 +13,10 @@ on:
   push:
 
 jobs:
-  deploy:
+  push_files:
     runs-on: ubuntu-latest
+    outputs:
+      commit_sha: ${{ steps.python-linters-commit-sha.outputs.commit_sha }}
     steps:
     - uses: actions/checkout@v4
     - name: Push github action and configs
@@ -33,8 +35,12 @@ jobs:
     - name: Get last commit SHA from python-linters
       id: python-linters-commit-sha
       run: |
-        echo "commit_sha=$(git rev-parse HEAD)
+        echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
+  create_pull_request:
+    runs-on: ubuntu-latest
+    needs: push_files
+    steps:
     - uses: actions/checkout@v4
       with:
         token: ${{ secrets.REPO_TOKEN }}
@@ -48,19 +54,34 @@ jobs:
         --base 'main' \
         --head ${{ env.DESTINATION_BRANCH }} \
         --title 'Add or update python linters' \
-        --body 'Update from ${{ github.repository }}@${{steps.python-linters-commit-SHA.outputs.commit_sha}}' \
+        --body 'Update from ${{ github.repository }}@${{needs.push_files.outputs.commit_sha}}' \
         --label 'github action' \
         --label 'bot' \
         --assignee '@me'
+      env:
+        GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
-        echo "success=$("gh pr list --json title --jq length" -eq "0")
-        echo "pull-request-url=$(gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url)" >> "$GITHUB_OUTPUT"
+  notify:
+    runs-on: ubuntu-latest
+    needs: push_files
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.REPO_TOKEN }}
+        repository: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
+        ref: ${{ env.DESTINATION_BRANCH }}
+
+    - name: Get pull request info
+      id: pull-request-info
+      run: |
+        pull_request_url=$(gh pr view ${{ env.DESTINATION_BRANCH }} --json url --jq .url)
+        echo "pull-request-url=$pull_request_url" >> "$GITHUB_OUTPUT"
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
     - name: Send email notification
       uses: dawidd6/action-send-mail@v3
-      if: steps.pull-request.outputs.success == 'true'
+      if: steps.pull-request-info.outputs.pull-request-url != 'no pull requests found for branch "${{ env.DESTINATION_BRANCH}}"'
       with:
         # Required mail server address if not connection_url:
         server_address: smtp.gmail.com
@@ -80,5 +101,5 @@ jobs:
         from: '${{ env.DESTINATION_REPOSITORY }}@github.com'
         # Optional plain body:
         html_body: |
-          [${{ env.DESTINATION_REPOSITORY }} pull request](${{ steps.pull-request.outputs.pull-request-url }})
+          [${{ env.DESTINATION_REPOSITORY }} pull request](${{ steps.pull-request-info.outputs.pull-request-url }})
         convert_markdown: true
