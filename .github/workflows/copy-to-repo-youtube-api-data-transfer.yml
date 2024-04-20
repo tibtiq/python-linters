@@ -53,7 +53,8 @@ jobs:
         --body "Update from https://$INPUT_GIT_SERVER/${GITHUB_REPOSITORY}/commit/${{steps.commit-SHA.outputs.commit_SHA}}" \
           --label "automated pr" \
           --assignee "@me"
-          echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+
+        echo ::set-output name=success::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
