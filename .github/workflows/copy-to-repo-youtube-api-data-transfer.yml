@@ -57,7 +57,7 @@ jobs:
 
     - name: Get pull request success
       run: |
-        echo "success=$($(gh pr list --json title --jq length) -eq 0)" >> $GITHUB_ENV
+        echo "success=$([[$(gh pr list --json title --jq length) -eq 0]])" >> $GITHUB_ENV
       env:
         GH_TOKEN: ${{ secrets.REPO_TOKEN }}
 
