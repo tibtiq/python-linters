@@ -5,7 +5,10 @@ env:
   COMMIT_EMAIL: dennisvtang@gmail.com
   SOURCE_FILES: |
     .github/workflows/ci.yml
-    configs/
+    .flake8
+    .mypy.ini
+    .pycodestyle
+    .pylintrc
 
 on:
   # allows manual trigger
