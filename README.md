@@ -8,3 +8,6 @@ Additionally it contains the github action to run [python-lint-annotate](https:/
 - Create a copy of `.github/workflows/workflow-templates/copy-to-repo-TEMPLATE.yml` and rename the "TEMPLATE" portion to the destination repo
 - In the copied file edit the 'CHANGEME's in the env section at the top.
 - Commit and push changes.
+
+> Don't modify the github action for the python linters directly. It'll be annoying when there's
+> changes from this repo.
