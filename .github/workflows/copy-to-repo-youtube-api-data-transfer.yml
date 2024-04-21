@@ -13,7 +13,6 @@ env:
 on:
   # allows manual trigger
   workflow_dispatch:
-  push:
 
 jobs:
   push_files:
