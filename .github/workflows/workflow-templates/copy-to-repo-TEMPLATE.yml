@@ -50,6 +50,13 @@ jobs:
         repository: ${{ env.DESTINATION_USERNAME }}/${{ env.DESTINATION_REPOSITORY }}
         ref: ${{ env.DESTINATION_BRANCH }}
 
+    - name: Create github labels
+      run: |
+        gh label create "github action" --force
+        gh label create "bot" --force
+      env:
+        GH_TOKEN: ${{ secrets.REPO_TOKEN }}
+
     - name: Create pull request
       id: pull-request
       run: |
