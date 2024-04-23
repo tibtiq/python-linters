@@ -1,7 +1,7 @@
 env:
   DESTINATION_USERNAME: dennisvtang
   DESTINATION_REPOSITORY: CHANGEME
-  DESTINATION_BRANCH: CHANGEME
+  DESTINATION_BRANCH: add-or-update-python-linters
   COMMIT_EMAIL: dennisvtang@gmail.com
   SOURCE_FILES: |
     .github/workflows/ci.yml
