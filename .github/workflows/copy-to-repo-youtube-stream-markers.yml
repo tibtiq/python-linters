@@ -1,5 +1,5 @@
 env:
-  DESTINATION_USERNAME: tibtiq
+  DESTINATION_USERNAME: ${{ github.actor }}
   DESTINATION_REPOSITORY: youtube-stream-markers
   DESTINATION_BRANCH: add-or-update-python-linters
   COMMIT_EMAIL: 29826331+tibtiq@users.noreply.github.com
