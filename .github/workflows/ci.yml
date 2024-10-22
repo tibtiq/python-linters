@@ -1,4 +1,5 @@
-# DO NOT MODIFY THIS FILE DIRECTLY, IT'LL BE ANNOYING
+# DO NOT MODIFY THIS FILE DIRECTLY
+# THIS FILE IS AUTO ADDED FROM https://github.com/tibtiq/python-linters
 name: Linter
 
 on:
