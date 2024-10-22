@@ -1,8 +1,8 @@
 env:
-  DESTINATION_USERNAME: dennisvtang
-  DESTINATION_REPOSITORY: youtube-stream-markers
+  DESTINATION_USERNAME: tibtiq
+  DESTINATION_REPOSITORY: dotconfigs
   DESTINATION_BRANCH: add-or-update-python-linters
-  COMMIT_EMAIL: dennisvtang@gmail.com
+  COMMIT_EMAIL: 29826331+tibtiq@users.noreply.github.com
   SOURCE_FILES: |
     .github/workflows/ci.yml
     .flake8
