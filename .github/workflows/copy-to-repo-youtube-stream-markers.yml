@@ -1,6 +1,6 @@
 env:
   DESTINATION_USERNAME: tibtiq
-  DESTINATION_REPOSITORY: dotconfigs
+  DESTINATION_REPOSITORY: youtube-api-data-transfer
   DESTINATION_BRANCH: add-or-update-python-linters
   COMMIT_EMAIL: 29826331+tibtiq@users.noreply.github.com
   SOURCE_FILES: |
