@@ -29,8 +29,8 @@ jobs:
         run: echo "" > requirements.txt
 
       - name: Linter
-        id: linter
-        uses: tibtiq/python-lint-annotate@b2754a6f701d
+      id: linter
+      uses: tibtiq/python-lint-annotate@06062b675a0ddda3fe9bd9375f086ddb5a0af874
         with:
           python-root-list: "src/"
           extra-pylint-options: "--disable=W1202,W1203,C0116"
