@@ -29,6 +29,7 @@ jobs:
         run: echo "" > requirements.txt
 
       - name: Linter
+        id: linter
         uses: juissi-t/python-lint-annotate@ff09bc6bdd47de544b00cf57a9921c636a829909
         with:
           python-root-list: "src/"
@@ -36,3 +37,23 @@ jobs:
           extra-pycodestyle-options: "--config=.pycodestyle"
           use-vulture: false
           use-black: false
+
+      - name: Fail workflow if linter has errors
+        run: |
+          # Define the phrases to search for
+          phrases=("Pylint error" "pycodestyle error" "Flake8 error" "mypy error" "isort error" "pycodestyle error")
+
+          # Read the output log
+          echo "Reusable workflow result: $GITHUB_ENV"
+
+          output=$($GITHUB_ENV)
+
+          # Check each phrase
+          for phrase in "${phrases[@]}"; do
+            if echo "$output" | grep -q "$phrase"; then
+              echo "Found prohibited phrase: $phrase"
+              exit 1
+            fi
+          done
+
+          echo "No prohibited phrases found."
