@@ -30,7 +30,7 @@ jobs:
 
       - name: Linter
         id: linter
-        uses: tibtiq/python-lint-annotate@665082265cee220b74d8ba2bf078ed496a5ef59b
+        uses: tibtiq/python-lint-annotate@main
         with:
           python-root-list: "src/"
           extra-pylint-options: "--disable=W1202,W1203,C0116"
