@@ -44,9 +44,9 @@ jobs:
           phrases=("Pylint error" "pycodestyle error" "Flake8 error" "mypy error" "isort error" "pycodestyle error")
 
           # Read the output log
-          echo "Reusable workflow result: $GITHUB_ENV"
+          echo "Reusable workflow result: ${{ steps.linter.outputs.command_output }}"
 
-          output=$($GITHUB_ENV)
+          output=$(${{ steps.linter.outputs.command_output }})
 
           # Check each phrase
           for phrase in "${phrases[@]}"; do
