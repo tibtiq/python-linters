@@ -30,7 +30,7 @@ jobs:
 
       - name: Linter
         id: linter
-        uses: tibtiq/python-lint-annotate@aa0cc6687ee625b1448996ad10ece82d1567dd63
+        uses: tibtiq/python-lint-annotate@8cdc35bce74a17b6a4d98cbedf116907ba440a26
         with:
           python-root-list: "src/"
           extra-pylint-options: "--disable=W1202,W1203,C0116"
@@ -44,7 +44,8 @@ jobs:
           phrases=("Pylint error" "pycodestyle error" "Flake8 error" "mypy error" "isort error" "pycodestyle error")
 
           # Read the output log
-          echo "Reusable workflow result: ${{ steps.linter.outputs.command_output }}"
+          echo "Decoded variable:"
+          echo "${{ steps.linter.outputs.command_output }}" | base64 --decode
 
           output=$(${{ steps.linter.outputs.command_output }})
 
