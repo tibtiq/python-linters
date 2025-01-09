@@ -15,6 +15,19 @@ jobs:
       - name: Check out source repository
         uses: actions/checkout@v4
 
+      - name: Check if requirements.txt exists
+        id: check-file
+        run: |
+          if [ -f requirements.txt ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create empty requirements.txt if not found
+        if: steps.check-file.outputs.exists == 'false'
+        run: echo "" > requirements.txt
+
       - name: Linter
         uses: juissi-t/python-lint-annotate@ff09bc6bdd47de544b00cf57a9921c636a829909
         with:
