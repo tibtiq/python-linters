@@ -1,0 +1,25 @@
+name: Linter
+
+on:
+  # allows manual trigger
+  workflow_dispatch:
+  # allows other workflows to call this workflow
+  workflow_call:
+  pull_request:
+
+jobs:
+  python-lint:
+    runs-on: ubuntu-latest
+    name: CI workflow
+    steps:
+      - name: Check out source repository
+        uses: actions/checkout@v4
+
+      - name: Linter
+        uses: juissi-t/python-lint-annotate@ff09bc6bdd47de544b00cf57a9921c636a829909
+        with:
+          python-root-list: "src/"
+          extra-pylint-options: "--disable=W1202,W1203,C0116"
+          extra-pycodestyle-options: "--config=.pycodestyle"
+          use-vulture: false
+          use-black: false
