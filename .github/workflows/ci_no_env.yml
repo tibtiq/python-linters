@@ -39,7 +39,6 @@ jobs:
           use-black: false
 
       - name: Fail workflow if linter has errors
-        needs: linter
         run: |
           # Define the phrases to search for
           phrases=("Pylint error" "pycodestyle error" "Flake8 error" "mypy error" "isort error" "pycodestyle error")
