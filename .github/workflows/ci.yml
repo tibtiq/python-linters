@@ -10,7 +10,7 @@ on:
   pull_request:
 
 jobs:
-  ruff-formatter-and-linter:
+  formatter-and-linter:
     runs-on: ubuntu-latest
     steps:
       - name: Check out source repository
