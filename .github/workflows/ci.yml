@@ -10,7 +10,7 @@ on:
   pull_request:
 
 jobs:
-  python-lint:
+  ruff-formatter-and-linter:
     runs-on: ubuntu-latest
     name: CI workflow
     steps:
