@@ -3,20 +3,52 @@ name: Formatter and Linter
 on:
   # allows other workflows to call this workflow
   workflow_call:
+  push:
 
 jobs:
-  formatter-and-linter:
+  lock_file:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out source repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv lock --locked
 
-      - name: formatter
-        uses: astral-sh/ruff-action@v3
-        with:
-          args: "format --check"
+  linting:
+    runs-on: ubuntu-latest
+    needs: [lock_file]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uvx ruff check .
 
-      - name: linter
-        uses: astral-sh/ruff-action@v3
-        with:
-          args: "check"
+  formatting:
+    runs-on: ubuntu-latest
+    needs: [lock_file]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uvx ruff format --check .
+
+  type_consistency:
+    runs-on: ubuntu-latest
+    needs: [lock_file]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv run pyright .
+
+  tests:
+    runs-on: ubuntu-latest
+    needs: [lock_file]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv run pytest -v --durations=0 --cov --cov-report=xml
+
+  # build:
+  #   runs-on: [ubuntu-latest]
+  #   needs: [linting, formatting, type_consistency, tests]
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v5
+  #     - run: uv build
