@@ -4,7 +4,7 @@ on:
   # allows other workflows to call this workflow
   workflow_call:
     inputs:
-      workdir:
+      working-directory:
         required: false
         type: string
         default: '.'
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ${{ inputs.workdir }}
+        working-directory: ${{ inputs.working-directory }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
@@ -26,7 +26,7 @@ jobs:
     needs: [lock_file]
     defaults:
       run:
-        working-directory: ${{ inputs.workdir }}
+        working-directory: ${{ inputs.working-directory }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
@@ -37,7 +37,7 @@ jobs:
     needs: [lock_file]
     defaults:
       run:
-        working-directory: ${{ inputs.workdir }}
+        working-directory: ${{ inputs.working-directory }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
@@ -48,7 +48,7 @@ jobs:
     needs: [lock_file]
     defaults:
       run:
-        working-directory: ${{ inputs.workdir }}
+        working-directory: ${{ inputs.working-directory }}
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
