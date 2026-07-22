@@ -27,5 +27,8 @@ jobs:
         run: uv run pytest -v --durations=0 --cov --cov-report=xml
 
       - name: Run Integration Tests (Dependabot PRs only)
-        if: github.actor == 'dependabot[bot]'
-        run: uv run pytest --run-integration -m integration
+        if: |
+          github.actor == 'dependabot[bot]' ||
+          startsWith(github.ref_name, 'dependabot/') ||
+          startsWith(github.head_ref, 'dependabot/')
+        run: uv run pytest -v --run-integration -m integration
